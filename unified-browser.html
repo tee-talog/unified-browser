@@ -1,0 +1,33 @@
+<!doctpe html>
+<html>
+<head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	<div style="display: flex; width: 100vw; height: 100vh">
+		<textarea id="textarea" style="width: 50%; height: 100%;"></textarea>
+		<pre style="height: 100%; width: 50%"><code id="code" class="diff hljs" style="height: 100%;">
+		</code></pre>
+	</div>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+	<script>
+		hljs.initHighlightingOnLoad();
+
+		const preCode = document.getElementById("code");
+		document.getElementById("textarea").addEventListener("keyup", (event) => {
+			preCode.innerText = event.target.value
+				.replace(/=====/g, "＝＝＝＝＝")
+				.replace(/<!--/g, "");
+			hljs.highlightBlock(preCode);
+		});
+	</script>
+</body>
+</html>
